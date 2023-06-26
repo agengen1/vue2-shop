@@ -1,81 +1,79 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name:"/",
-    redirect: '/layout',
+    name: "/",
+    redirect: "/layout",
   },
   {
-    path:"/layout",
-    name:"layout",
-    meta:{
-      title:"布局"
+    path: "/layout",
+    name: "layout",
+    meta: {
+      title: "布局",
     },
-    component: ()=>import("@/views/layout/index.vue"),
-    redirect: '/layout/home',
-    children:[
+    component: () => import("@/views/layout/index.vue"),
+    redirect: "/layout/home",
+    children: [
       {
         path: "home",
-        name:"home",
-        meta:{
-          title:"首页"
+        name: "home",
+        meta: {
+          title: "首页",
         },
-        component: ()=>import("@/views/layout/home/index.vue"),
+        component: () => import("@/views/layout/home/index.vue"),
       },
       {
         path: "class",
-        name:"class",
-        meta:{
-          title:"分类"
+        name: "class",
+        meta: {
+          title: "分类",
         },
-        component: ()=>import("@/views/layout/class/index.vue"),
+        component: () => import("@/views/layout/class/index.vue"),
       },
       {
-        path: "ShopCart",
-        name:"ShopCart",
-        meta:{
-          title:"购物车"
+        path: "shopCart",
+        name: "shopCart",
+        meta: {
+          title: "购物车",
         },
-        component: ()=>import("@/views/layout/ShopCart/index.vue"),
+        component: () => import("@/views/layout/shopCart/index.vue"),
       },
       {
         path: "user",
-        name:"user",
-        meta:{
-          title:"我的"
+        name: "user",
+        meta: {
+          title: "我的",
         },
-        component: ()=>import("@/views/layout/user/index.vue"),
+        component: () => import("@/views/layout/user/index.vue"),
       },
       {
         path: "news",
-        name:"news",
-        meta:{
-          title:"新闻资讯列表"
+        name: "news",
+        meta: {
+          title: "新闻资讯列表",
         },
-        component: ()=>import("@/views/layout/news/index.vue"),
+        component: () => import("@/views/layout/news/index.vue"),
       },
       {
         path: "newsDetails/:newId",
-        name:"newsDetails",
-        meta:{
-          title:"新闻详情"
+        name: "newsDetails",
+        meta: {
+          title: "新闻详情",
         },
-        component: ()=>import("@/views/layout/news/news_details/index.vue"),
+        component: () => import("@/views/layout/news/news_details/index.vue"),
       },
-    ]
+    ],
   },
-  
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

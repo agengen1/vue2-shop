@@ -7,9 +7,13 @@
     </van-nav-bar>
     <router-view></router-view>
     <van-tabbar route>
-      <van-tabbar-item to="/layout/home" icon="wap-home-o">首页</van-tabbar-item>
+      <van-tabbar-item to="/layout/home" icon="wap-home-o"
+        >首页</van-tabbar-item
+      >
       <van-tabbar-item to="/layout/class" icon="apps-o">分类</van-tabbar-item>
-      <van-tabbar-item to="/layout/shopCart" icon="cart-o">购物车</van-tabbar-item>
+      <van-tabbar-item to="/layout/shopCart" icon="cart-o"
+        >购物车</van-tabbar-item
+      >
       <van-tabbar-item to="/layout/user" icon="setting-o">我的</van-tabbar-item>
     </van-tabbar>
   </div>
@@ -21,20 +25,20 @@ export default {
 
   data() {
     return {
-      inclueback: ["home", "class", "ShopCart", "user"]
+      inclueback: ["home", "class", "shopCart", "user"],
     };
   },
   computed: {
     isDisplayback() {
       return !this.inclueback.includes(this.$route.name);
-    }
+    },
   },
 
   methods: {
     onClickLeft() {
       this.$router.go(-1);
-    }
-  }
+    },
+  },
 };
 </script>
 
