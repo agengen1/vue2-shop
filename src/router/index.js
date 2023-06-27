@@ -40,7 +40,7 @@ const routes = [
         meta: {
           title: "购物车",
         },
-        component: () => import("@/views/layout/shopCart/index.vue"),
+        component: () => import("@/views/layout/ShopCart/index.vue"),
       },
       {
         path: "user",
@@ -56,7 +56,7 @@ const routes = [
         meta: {
           title: "新闻资讯列表",
         },
-        component: () => import("@/views/layout/news/index.vue"),
+        component: () => import("@/components/news/index.vue"),
       },
       {
         path: "newsDetails/:newId",
@@ -64,9 +64,25 @@ const routes = [
         meta: {
           title: "新闻详情",
         },
-        component: () => import("@/views/layout/news/news_details/index.vue"),
+        component: () => import("@/components/news/news_details/index.vue"),
       },
-    ],
+      {
+        path: "imgSharing",
+        name: "imgSharing",
+        meta: {
+          title: "图片分享列表",
+        },
+        component: () => import("@/components/imgSharing/index.vue"),
+      },
+      {
+        path: "imgSharingDetails/:imgListId",
+        name: "imgSharingDetails",
+        meta: {
+          title: "图片分享列表详情",
+        },
+        component: () => import("@/components/imgSharing/imgSharing_list/imgSharing_details/index.vue"),
+      }
+    ]
   },
 ];
 

@@ -12,7 +12,7 @@
              <span>新闻资讯</span>
           </div>      
       </van-grid-item>
-      <van-grid-item>
+      <van-grid-item to="/layout/imgSharing" >
           <div>
              <img src="@/assets/menu2.png" > 
              <span>图片分享</span>

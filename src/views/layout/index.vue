@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <van-nav-bar fixed :title="$route.meta.title" @click-left="onClickLeft">
+    <van-nav-bar fixed :title="$route.meta.title" :z-index="9999" @click-left="onClickLeft" >
       <template v-if="isDisplayback" #left>
         <van-icon name="arrow-left" :size="18" color="#fff" />返回
       </template>
