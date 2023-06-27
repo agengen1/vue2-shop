@@ -40,7 +40,7 @@ const routes = [
         meta: {
           title: "购物车",
         },
-        component: () => import("@/views/layout/shopCart/index.vue"),
+        component: () => import("@/views/layout/ShopCart/index.vue"),
       },
       {
         path: "user",
