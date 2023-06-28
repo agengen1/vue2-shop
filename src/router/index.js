@@ -81,7 +81,23 @@ const routes = [
           title: "图片分享列表详情",
         },
         component: () => import("@/components/imgSharing/imgSharing_list/imgSharing_details/index.vue"),
-      }
+      },
+      {
+        path: "classShopDetails/:classId",
+        name: "classShopDetails",
+        meta: {
+          title: "分类商品列表",
+        },
+        component: () => import("@/views/layout/class/class_shop_details/index.vue"),
+      },
+      {
+        path: "shopDetails/:shopId",
+        name: "shopDetails",
+        meta: {
+          title: "商品详情",
+        },
+        component: () => import("@/components/shop_details/index.vue"),
+      },
     ]
   },
 ];

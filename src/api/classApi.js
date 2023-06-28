@@ -13,7 +13,7 @@ export function getShopClassapi(){
  * @param {string|number} id 商品分类id
 */
 export function getShopListapi(id){
-    return axios.get(`goodslist?category_id=${id}`)
+    return axios.get(`goodslist?category_id=${2}`)
 }
 
 /**

@@ -18,7 +18,7 @@
              <span>图片分享</span>
           </div>      
       </van-grid-item>
-      <van-grid-item>
+      <van-grid-item to="/layout/class">
           <div>
              <img src="@/assets/menu3.png" > 
              <span>商品购买</span>

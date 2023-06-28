@@ -10,16 +10,17 @@
         />
       </van-sidebar>
     </div>
-    <div class="right">
+    <div class="right" ref="right">
       <div
         class="shopInfo"
         v-for="(item,index) in ShopClassList"
         :key="item.id"
         :data-index="index"
+        
       >
         <h2>{{item.name}}</h2>
         <div>
-          <p v-for="itemC in item.sub" :key="itemC.id">
+          <p v-for="itemC in item.sub" :key="itemC.id" @click="clickSkipClassSkip(item.id)">
             <img v-lazy="itemC.image" :alt="itemC.name" />
             <span>{{itemC.name}}</span>
           </p>
@@ -31,18 +32,40 @@
 
 <script>
 import { getShopClassapi } from "@/api/classApi";
+import animate from "@/utils/animate.js";
 export default {
   name: "class",
 
   data() {
     return {
       ShopClassList: [], //分类数据
-      classIndex: 0 //选中索引
+      classIndex: 0, //选中索引
+      classIndexHeight: [] //索引元素距离页面元素
     };
   },
 
   created() {
     this.getShopClass();
+  },
+  mounted() {
+    this.$refs.right.addEventListener("scroll", e => {
+      this.classIndexHeight.forEach((item, index) => {
+        if (e.target.scrollTop + 46 >= item) {
+          this.classIndex = index;
+        }
+      });
+    });
+  },
+  watch: {
+    ShopClassList() {
+      this.$nextTick(() => {
+        setTimeout(() => {
+          this.$refs.right.querySelectorAll("div.shopInfo").forEach(item => {
+            this.classIndexHeight.push(item.offsetTop);
+          });
+        }, 1);
+      });
+    }
   },
 
   methods: {
@@ -59,8 +82,14 @@ export default {
       let el = document.querySelector(`div[data-index='${index}']`);
       let el_right = document.querySelector(".right");
       let height = el.offsetTop - 46;
-      el_right.scrollTop = height
-
+      animate(el_right, height, 500);
+    },
+    /**
+     * 点击跳转分类商品列表
+     * @param {string|number} id 商品分类id
+     */
+    clickSkipClassSkip(id) {
+      this.$router.push(`/layout/classShopDetails/${id}`);
     }
   }
 };
