@@ -15,15 +15,15 @@
           <van-stepper v-model="shopCount" />
         </p>
         <p>
-          <van-button type="info" round size="small">立即购买</van-button>
-          <van-button type="primary" round size="small">加入购物车</van-button>
+          <van-button type="info" round size="mini">立即购买</van-button>
+          <van-button type="primary" round size="mini">加入购物车</van-button>
         </p>
       </div>
     </div>
     <div class="footer">
       <h2>商品参数</h2>
-      <p>商品ID号: {{shopDetails.id}}</p>
-      <p>库存情况: {{shopDetails.num}}件</p>
+      <p><span>商品ID号:</span> {{shopDetails.id}}</p>
+      <p><span>库存情况:</span> {{shopDetails.num}}件</p>
     </div>
   </div>
 </template>
@@ -59,6 +59,7 @@ export default {
 .shopDetails {
   padding: 8px;
   background-color: #f1f1f1;
+  height: 83vh;
   .top {
     display: flex;
     justify-content: center;
@@ -77,7 +78,7 @@ export default {
     }
     > div {
       p {
-        margin: 5px 0;
+        margin: 10px 0;
         &:nth-child(1) {
           span {
             &:nth-child(1) {
@@ -89,6 +90,34 @@ export default {
             }
           }
         }
+        &:nth-child(2) {
+          display: flex;
+          align-items: center;
+          .van-stepper{
+            margin-left: 5px;
+          }
+        }
+        &:nth-child(3) {
+          button{
+            margin-right:10px;
+          }
+        }
+      }
+    }
+  }
+  .footer{
+    margin: 10px 0;
+    background-color: #fff;
+    padding: 5px 10px;
+    h2 {
+      height: 30px;
+      font-weight: 700;
+      border-bottom: 1px solid #e3e1e1;
+    }
+    >p{
+      margin: 10px 0;
+      span{
+        color: #848484;
       }
     }
   }

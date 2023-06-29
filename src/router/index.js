@@ -98,6 +98,22 @@ const routes = [
         },
         component: () => import("@/components/shop_details/index.vue"),
       },
+      {
+        path: "login",
+        name: "login",
+        meta: {
+          title: "登录",
+        },
+        component: () => import("@/views/layout/user/login/index.vue"),
+      },
+      {
+        path: "register",
+        name: "register",
+        meta: {
+          title: "注册",
+        },
+        component: () => import("@/views/layout/user/register/index.vue"),
+      },
     ]
   },
 ];
