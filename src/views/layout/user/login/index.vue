@@ -19,6 +19,9 @@
       <div style="margin: 16px;">
         <van-button round block type="info" native-type="submit">登录</van-button>
       </div>
+      <div class="skip">
+        <p>还没有有账号，<span @click="$router.push('/layout/register')">点击注册账号</span></p>
+      </div>
     </van-form>
   </div>
 </template>
@@ -67,6 +70,16 @@ export default {
   padding: 5px;
   .van-form {
     margin-top: 10px;
+  }
+  .skip{
+    display: flex;
+    justify-content: center;
+    font: 700 14px "华文楷书";
+    color: #848484;
+    span{
+      color: #1989fa;
+      text-decoration: underline;
+    }
   }
 }
 </style>

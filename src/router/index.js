@@ -114,6 +114,30 @@ const routes = [
         },
         component: () => import("@/views/layout/user/register/index.vue"),
       },
+      {
+        path: "address",
+        name: "address",
+        meta: {
+          title: "收货地址管理",
+        },
+        component: () => import("@/components/delivery_address/index.vue"),
+      },
+      {
+        path: "add_address",
+        name: "add_address",
+        meta: {
+          title: "新增收货地址",
+        },
+        component: () => import("@/components/delivery_address/add_address/index.vue"),
+      },
+      {
+        path: "edit_address/:addressId",
+        name: "edit_address",
+        meta: {
+          title: "修改收货地址",
+        },
+        component: () => import("@/components/delivery_address/edit_address/index.vue"),
+      },
     ]
   },
 ];

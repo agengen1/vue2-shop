@@ -5,7 +5,7 @@ import axios from "@/utils/request"
  *
 */
 export function getImgSharingClassapi(){
-    return axios.get("photo/getimgcategory")
+    return axios.get("/photo/getimgcategory")
 }
 
 /**
@@ -13,7 +13,7 @@ export function getImgSharingClassapi(){
  * @param {string|number} id 图片分类id
 */
 export function getImgSharingListapi(id){
-    return axios.get(`photo/getimages?id=${id}`)
+    return axios.get(`/photo/getimages?id=${id}`)
 }
 
 /**
@@ -21,7 +21,7 @@ export function getImgSharingListapi(id){
  * @param {string|number} id 图片列表数据id
 */
 export function getImgSharingDetailsapi(id){
-    return axios.get(`photo/getimageInfo?id=${id}`)
+    return axios.get(`/photo/getimageInfo?id=${id}`)
 }
 
 /**
@@ -29,5 +29,5 @@ export function getImgSharingDetailsapi(id){
  * @param {string|number} id 图片列表数据id
 */
 export function getImgSharingDetailsImgListapi(id){
-    return axios.get(`photo/getthumimages?id=${id}`)
+    return axios.get(`/photo/getthumimages?id=${id}`)
 }

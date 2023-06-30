@@ -7,7 +7,6 @@ import 'vant/lib/index.css';
 import '@/assets/css/reset.css';
 import { Lazyload } from 'vant';
 
-
 Vue.config.productionTip = false
 
 Vue.use(Vant);

@@ -6,7 +6,7 @@ import axios from "@/utils/request"
  * @param {string} password 密码
 */
 export function Loginapi(username, password) {
-    return axios.post("login", {
+    return axios.post("/login", {
         username, password
     })
 }
@@ -18,7 +18,15 @@ export function Loginapi(username, password) {
  * @param {string} email 邮箱
 */
 export function Registerapi(username, password,email) {
-    return axios.post("register", {
+    return axios.post("/register", {
         username, password,email
     })
+}
+
+
+/**
+ * 退出登录
+*/
+export function Logoutapi() {
+    return axios.get("/logout")
 }

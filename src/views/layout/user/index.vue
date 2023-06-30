@@ -9,9 +9,8 @@
         <span @click="clickSkipRouter('login')">登录</span> /
         <span @click="clickSkipRouter('register')">注册</span>
       </p>
-      
     </div>
-    <div class="other">
+    <div class="other" v-if="JSON.stringify(userinfo) != '{}'&& token!=''">
       <van-cell>
         <!-- 使用 title 插槽来自定义标题 -->
         <template #title>
@@ -19,7 +18,7 @@
           <span class="other_title">我的订单</span>
         </template>
       </van-cell>
-      <van-cell>
+      <van-cell to="/layout/address">
         <!-- 使用 title 插槽来自定义标题 -->
         <template #title>
           <img src="@/assets/avatar_default.png" />
@@ -35,31 +34,44 @@
       </van-cell>
     </div>
     <div class="logoutButton" v-if="token!=''">
-      <van-button type="danger" round >退出登录</van-button>
+      <van-button type="danger" round @click="Logout">退出登录</van-button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex"
+import { mapState, mapMutations } from "vuex";
+import { Logoutapi } from "@/api/userApi";
 export default {
   name: "user",
 
   data() {
     return {};
   },
-  computed:{
-    ...mapState("user",["userinfo","token"])
+  computed: {
+    ...mapState("user", ["userinfo", "token"])
   },
 
   methods: {
-    /** 
+    /**
      * 点击跳转路由
      * @param {'login'|'register'} location 跳转的路由
-    */
-   clickSkipRouter(location){
-       this.$router.push(`/layout/${location}`)
-   }
+     */
+    clickSkipRouter(location) {
+      this.$router.push(`/layout/${location}`);
+    },
+    /**
+     * 退出登录
+     */
+    async Logout() {
+      const { data: res } = await Logoutapi();
+      if(!res){
+        this.$toast.success("退出成功");
+        this.ClEARTOKEN()
+        this.ClEARUSERINFO()
+      }
+    },
+    ...mapMutations("user", ["ClEARTOKEN", "ClEARUSERINFO"])
   }
 };
 </script>
@@ -97,7 +109,7 @@ export default {
     margin-top: 10px;
     .van-cell {
       img {
-          margin-right: 10px;
+        margin-right: 10px;
         width: 30px;
         height: 30px;
         object-fit: cover;
@@ -108,11 +120,11 @@ export default {
       }
     }
   }
-  .logoutButton{
-    margin-top:50px;
+  .logoutButton {
+    margin-top: 50px;
     display: flex;
     justify-content: center;
-    button{
+    button {
       width: 80%;
       height: 40px;
     }

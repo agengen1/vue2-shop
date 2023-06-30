@@ -5,7 +5,7 @@ import axios from "@/utils/request"
  *
 */
 export function getShopClassapi(){
-    return axios.get("category")
+    return axios.get("/category")
 }
 
 /**
@@ -13,7 +13,7 @@ export function getShopClassapi(){
  * @param {string|number} id 商品分类id
 */
 export function getShopListapi(id){
-    return axios.get(`goodslist?category_id=${2}`)
+    return axios.get(`/goodslist?category_id=${2}`)
 }
 
 /**
@@ -21,7 +21,7 @@ export function getShopListapi(id){
  * @param {string|number} id 商品id
 */
 export function getShopDetailsapi(id){
-    return axios.get(`goodsinfo?id=${id}`)
+    return axios.get(`/goodsinfo?id=${id}`)
 }
 
 /**
@@ -29,5 +29,5 @@ export function getShopDetailsapi(id){
  * @param {Array} ids 商品id数组
 */
 export function getShopDetailsArrayapi(ids){
-    return axios.get(`shopcart?ids=${ids}`)
+    return axios.get(`/shopcart?ids=${ids}`)
 }

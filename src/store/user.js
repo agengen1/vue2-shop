@@ -12,6 +12,14 @@ export default {
         SETUSERINFO(state, value) {
             state.userinfo = value
             window.localStorage.setItem("userinfo", JSON.stringify(value))
+        },
+        ClEARTOKEN(state) {
+            state.token = "";
+            window.localStorage.removeItem("token")
+        },
+        ClEARUSERINFO(state) {
+            state.userinfo = {}
+            window.localStorage.removeItem("userinfo")
         }
     }
 }

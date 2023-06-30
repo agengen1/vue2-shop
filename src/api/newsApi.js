@@ -13,5 +13,5 @@ export function getNewsListapi(){
  * @param {string|number} id 新闻id
 */
 export function getNewsDetailsapi(id){
-    return axios.get(`news/show?id=${id}`)
+    return axios.get(`/news/show?id=${id}`)
 }

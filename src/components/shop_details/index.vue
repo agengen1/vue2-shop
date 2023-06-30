@@ -1,6 +1,6 @@
 <template>
   <div class="shopDetails">
-    <div class="top">
+    <div class="top" v-if="shopDetails.image">
       <img v-lazy="'http://tpadmin.test/static/uploads/'+shopDetails.image" />
     </div>
     <div class="Minfo">
