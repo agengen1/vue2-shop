@@ -15,28 +15,35 @@
           <van-stepper v-model="shopCount" />
         </p>
         <p>
-          <van-button type="info" round size="mini">立即购买</van-button>
-          <van-button type="primary" round size="mini">加入购物车</van-button>
+          <van-button type="info" round size="mini" @click="clickSkipPayment">立即购买</van-button>
+          <van-button type="primary" round size="mini" @click="clickPushShopCart">加入购物车</van-button>
         </p>
       </div>
     </div>
     <div class="footer">
       <h2>商品参数</h2>
-      <p><span>商品ID号:</span> {{shopDetails.id}}</p>
-      <p><span>库存情况:</span> {{shopDetails.num}}件</p>
+      <p>
+        <span>商品ID号:</span>
+        {{shopDetails.id}}
+      </p>
+      <p>
+        <span>库存情况:</span>
+        {{shopDetails.num}}件
+      </p>
     </div>
   </div>
 </template>
 
 <script>
 import { getShopDetailsapi } from "@/api/classApi";
+import { mapMutations } from "vuex";
 export default {
   name: "shopDetails",
 
   data() {
     return {
       shopDetails: {}, //商品详情
-      shopCount: 0 //购买数量
+      shopCount: 1 //购买数量
     };
   },
 
@@ -50,7 +57,21 @@ export default {
       if (res.code === 1) {
         this.shopDetails = res.data;
       }
-    }
+    },
+    clickPushShopCart() {
+      let obj = this.shopDetails;
+      obj.shopCount = this.shopCount;
+      obj.selected = false
+      this.PUSHSHOPLIST(obj)
+    },
+    clickSkipPayment(){
+      let obj = this.shopDetails
+      obj.shopCount = this.shopCount
+      this.PUSHPAYMENTSHOPLIST([obj])
+      this.$router.push("/layout/payment")
+    },
+    ...mapMutations("shopCart", ["PUSHSHOPLIST"]),
+    ...mapMutations("payment", ["PUSHPAYMENTSHOPLIST"])
   }
 };
 </script>
@@ -93,19 +114,19 @@ export default {
         &:nth-child(2) {
           display: flex;
           align-items: center;
-          .van-stepper{
+          .van-stepper {
             margin-left: 5px;
           }
         }
         &:nth-child(3) {
-          button{
-            margin-right:10px;
+          button {
+            margin-right: 10px;
           }
         }
       }
     }
   }
-  .footer{
+  .footer {
     margin: 10px 0;
     background-color: #fff;
     padding: 5px 10px;
@@ -114,9 +135,9 @@ export default {
       font-weight: 700;
       border-bottom: 1px solid #e3e1e1;
     }
-    >p{
+    > p {
       margin: 10px 0;
-      span{
+      span {
         color: #848484;
       }
     }

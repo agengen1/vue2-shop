@@ -80,7 +80,10 @@ const routes = [
         meta: {
           title: "图片分享列表详情",
         },
-        component: () => import("@/components/imgSharing/imgSharing_list/imgSharing_details/index.vue"),
+        component: () =>
+          import(
+            "@/components/imgSharing/imgSharing_list/imgSharing_details/index.vue"
+          ),
       },
       {
         path: "classShopDetails/:classId",
@@ -88,7 +91,8 @@ const routes = [
         meta: {
           title: "分类商品列表",
         },
-        component: () => import("@/views/layout/class/class_shop_details/index.vue"),
+        component: () =>
+          import("@/views/layout/class/class_shop_details/index.vue"),
       },
       {
         path: "shopDetails/:shopId",
@@ -128,7 +132,8 @@ const routes = [
         meta: {
           title: "新增收货地址",
         },
-        component: () => import("@/components/delivery_address/add_address/index.vue"),
+        component: () =>
+          import("@/components/delivery_address/add_address/index.vue"),
       },
       {
         path: "edit_address/:addressId",
@@ -136,9 +141,34 @@ const routes = [
         meta: {
           title: "修改收货地址",
         },
-        component: () => import("@/components/delivery_address/edit_address/index.vue"),
+        component: () =>
+          import("@/components/delivery_address/edit_address/index.vue"),
       },
-    ]
+      {
+        path: "payment",
+        name: "payment",
+        meta: {
+          title: "支付",
+        },
+        component: () => import("@/components/payment/index.vue"),
+      },
+      {
+        path: "order",
+        name: "order",
+        meta: {
+          title: "订单列表",
+        },
+        component: () => import("@/components/order/index.vue"),
+      },
+      {
+        path: "orderDetails",
+        name: "orderDetails",
+        meta: {
+          title: "订单详情",
+        },
+        component: () => import("@/components/order/order_details/index.vue"),
+      },
+    ],
   },
 ];
 

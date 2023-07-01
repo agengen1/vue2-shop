@@ -1,4 +1,4 @@
-import axios from "@/utils/request"
+import axios from "@/utils/request";
 
 /**
  * 创建订单
@@ -8,33 +8,34 @@ import axios from "@/utils/request"
 
 */
 export function CreateOrderapi(address, note, goods) {
-    return axios.post("/order/create", {
-        address, note, goods
-    })
+  return axios.post("/order/create", {
+    address,
+    note,
+    goods,
+  });
 }
 
 /**
  * 查询订单列表
-*/
+ */
 export function getOrderListapi() {
-    return axios.get("order/list")
+  return axios.get("order/list");
 }
-
 
 /**
  * 查询订单详情
  * @param {string|number} id 订单id
-*/
+ */
 export function getOrderDetailsapi(id) {
-    return axios.get(`/order/show?id=${id}`)
+  return axios.get(`/order/show?id=${id}`);
 }
 
 /**
  * 取消订单
  * @param {string|number} id 订单id
-*/
+ */
 export function CancelOrderapi(id) {
-    return axios.post("/order/cancel",{
-        id
-    })
+  return axios.post("/order/cancel", {
+    id,
+  });
 }

@@ -4,14 +4,14 @@
       <p>
         <img src="@/assets/avatar_default.png" />
       </p>
-      <p v-if="JSON.stringify(userinfo) != '{}'">{{userinfo.username}}</p>
+      <p v-if="JSON.stringify(userinfo) != '{}'">{{ userinfo.username }}</p>
       <p v-else>
         <span @click="clickSkipRouter('login')">登录</span> /
         <span @click="clickSkipRouter('register')">注册</span>
       </p>
     </div>
-    <div class="other" v-if="JSON.stringify(userinfo) != '{}'&& token!=''">
-      <van-cell>
+    <div class="other" v-if="JSON.stringify(userinfo) != '{}' && token != ''">
+      <van-cell to="/layout/order">
         <!-- 使用 title 插槽来自定义标题 -->
         <template #title>
           <img src="@/assets/avatar_default.png" />
@@ -33,7 +33,7 @@
         </template>
       </van-cell>
     </div>
-    <div class="logoutButton" v-if="token!=''">
+    <div class="logoutButton" v-if="token != ''">
       <van-button type="danger" round @click="Logout">退出登录</van-button>
     </div>
   </div>
@@ -49,7 +49,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapState("user", ["userinfo", "token"])
+    ...mapState("user", ["userinfo", "token"]),
   },
 
   methods: {
@@ -65,14 +65,14 @@ export default {
      */
     async Logout() {
       const { data: res } = await Logoutapi();
-      if(!res){
+      if (!res) {
         this.$toast.success("退出成功");
-        this.ClEARTOKEN()
-        this.ClEARUSERINFO()
+        this.ClEARTOKEN();
+        this.ClEARUSERINFO();
       }
     },
-    ...mapMutations("user", ["ClEARTOKEN", "ClEARUSERINFO"])
-  }
+    ...mapMutations("user", ["ClEARTOKEN", "ClEARUSERINFO"]),
+  },
 };
 </script>
 

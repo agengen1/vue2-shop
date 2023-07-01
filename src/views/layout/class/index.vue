@@ -13,16 +13,19 @@
     <div class="right" ref="right">
       <div
         class="shopInfo"
-        v-for="(item,index) in ShopClassList"
+        v-for="(item, index) in ShopClassList"
         :key="item.id"
         :data-index="index"
-        
       >
-        <h2>{{item.name}}</h2>
+        <h2>{{ item.name }}</h2>
         <div>
-          <p v-for="itemC in item.sub" :key="itemC.id" @click="clickSkipClassSkip(item.id)">
+          <p
+            v-for="itemC in item.sub"
+            :key="itemC.id"
+            @click="clickSkipClassSkip(item.id)"
+          >
             <img v-lazy="itemC.image" :alt="itemC.name" />
-            <span>{{itemC.name}}</span>
+            <span>{{ itemC.name }}</span>
           </p>
         </div>
       </div>
@@ -40,7 +43,7 @@ export default {
     return {
       ShopClassList: [], //分类数据
       classIndex: 0, //选中索引
-      classIndexHeight: [] //索引元素距离页面元素
+      classIndexHeight: [], //索引元素距离页面元素
     };
   },
 
@@ -48,7 +51,7 @@ export default {
     this.getShopClass();
   },
   mounted() {
-    this.$refs.right.addEventListener("scroll", e => {
+    this.$refs.right.addEventListener("scroll", (e) => {
       this.classIndexHeight.forEach((item, index) => {
         if (e.target.scrollTop + 46 >= item) {
           this.classIndex = index;
@@ -60,12 +63,12 @@ export default {
     ShopClassList() {
       this.$nextTick(() => {
         setTimeout(() => {
-          this.$refs.right.querySelectorAll("div.shopInfo").forEach(item => {
+          this.$refs.right.querySelectorAll("div.shopInfo").forEach((item) => {
             this.classIndexHeight.push(item.offsetTop);
           });
         }, 1);
       });
-    }
+    },
   },
 
   methods: {
@@ -82,6 +85,7 @@ export default {
       let el = document.querySelector(`div[data-index='${index}']`);
       let el_right = document.querySelector(".right");
       let height = el.offsetTop - 46;
+      // el_right.scrollTop = height;
       animate(el_right, height, 500);
     },
     /**
@@ -90,8 +94,8 @@ export default {
      */
     clickSkipClassSkip(id) {
       this.$router.push(`/layout/classShopDetails/${id}`);
-    }
-  }
+    },
+  },
 };
 </script>
 

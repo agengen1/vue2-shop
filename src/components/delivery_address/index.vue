@@ -1,16 +1,16 @@
 <template>
   <div class="deliveryAddress">
-    <div class="address_list" v-if="addressList.length>0">
+    <div class="address_list" v-if="addressList.length > 0">
       <div class="address_info" v-for="item in addressList" :key="item.id">
         <div class="left">
           <p>
-            <span>{{item.name}}</span>
-            <span>{{item.tel}}</span>
-            <span v-if="item.id==addressDef.id">默认</span>
+            <span>{{ item.name }}</span>
+            <span>{{ item.tel }}</span>
+            <span v-if="item.id == addressDef.id">默认</span>
           </p>
           <p>
-            <span>{{handlerAddress(item.area)}}</span>
-            <span>{{item.detail}}</span>
+            <span>{{ handlerAddress(item.area) }}</span>
+            <span>{{ item.detail }}</span>
           </p>
         </div>
         <div class="right">
@@ -23,7 +23,9 @@
       <van-empty description="暂无收货地址,请添加收货地址" />
     </p>
     <div class="btn">
-      <van-button type="danger" to="/layout/add_address" icon="plus" round>新增收货地址</van-button>
+      <van-button type="danger" to="/layout/add_address" icon="plus" round
+        >新增收货地址</van-button
+      >
     </div>
   </div>
 </template>
@@ -32,7 +34,7 @@
 import {
   getAddressapi,
   getAddress_defapi,
-  deleteAddressapi
+  deleteAddressapi,
 } from "@/api/addressApi";
 import { Dialog } from "vant";
 export default {
@@ -41,7 +43,7 @@ export default {
   data() {
     return {
       addressList: [], //地址列表
-      addressDef: {} //默认地址
+      addressDef: {}, //默认地址
     };
   },
 
@@ -73,14 +75,14 @@ export default {
     },
     handlerAddress(values) {
       let str = "";
-      values.split("/").forEach(item => {
+      values.split("/").forEach((item) => {
         str += item;
       });
       return str;
     },
     clickDel(id) {
       Dialog.confirm({
-        message: "是否删除这条收货地址"
+        message: "是否删除这条收货地址",
       })
         .then(() => {
           this.deleteAddress(id);
@@ -91,10 +93,10 @@ export default {
           // on cancel
         });
     },
-    clickSkipEdit(id){
-        this.$router.push(`/layout/edit_address/${id}`)
-    }
-  }
+    clickSkipEdit(id) {
+      this.$router.push(`/layout/edit_address/${id}`);
+    },
+  },
 };
 </script>
 
@@ -122,6 +124,8 @@ export default {
       width: 80%;
       p {
         &:nth-child(1) {
+          display: flex;
+          flex-wrap: wrap;
           span {
             margin: 0 5px;
             &:nth-child(1) {
