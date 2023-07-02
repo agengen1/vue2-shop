@@ -73,7 +73,7 @@ export default {
   created() {
     this.updateShopCount();
     this.buyUpdate();
-    this.setAllSelect()
+    this.setAllSelect();
   },
   methods: {
     updateSelected(e, id) {
@@ -131,7 +131,7 @@ export default {
       });
       if (arr.length > 0) {
         this.allSelect = arr[0].selected;
-      } 
+      }
     },
     clickAllSelect(e) {
       this.SETALLSELECTED(e.target.checked);
@@ -151,7 +151,7 @@ export default {
 
 <style lang="less" scoped>
 .ShopCarts {
-  padding: 10px 10px 60px 10px;
+  padding: 10px 10px 110px 10px;
   .bottom-button {
     width: 160px;
     height: 40px;

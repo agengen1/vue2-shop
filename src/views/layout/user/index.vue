@@ -81,6 +81,7 @@ export default {
 <style lang="less" scoped>
 .user {
   padding: 5px;
+  padding-bottom: 50px;
   height: 83vh;
   background-color: #f1f1f1;
   .userinfo {

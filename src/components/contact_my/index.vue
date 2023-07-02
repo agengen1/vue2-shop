@@ -1,5 +1,8 @@
 <template>
-  <div class="contactMy"></div>
+  <div class="contactMy">
+    {{ resStr }}
+    http://api.qingyunke.com/api.php?key=free&appid=0&msg=百度查询 javascript
+  </div>
 </template>
 
 <script>
@@ -10,7 +13,8 @@ export default {
   data() {
     return {
       token:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6IjY0NjQ4MTNjMTM0ZDQ3OTJjZGJkZjVjOSIsInZlcnNpb24iOjAsInZpcFZlcnNpb24iOjAsImJyYW5jaCI6InpoIn0sImlhdCI6MTY4ODI3OTA2NSwiZXhwIjoxNjg4NDUxODY1fQ.9S0TBJtxW-WZPcwvCL4FDF6qMHmVGHEZobEFtM-YAH4"
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6IjY0NjQ4MTNjMTM0ZDQ3OTJjZGJkZjVjOSIsInZlcnNpb24iOjAsInZpcFZlcnNpb24iOjAsImJyYW5jaCI6InpoIn0sImlhdCI6MTY4ODI3OTA2NSwiZXhwIjoxNjg4NDUxODY1fQ.9S0TBJtxW-WZPcwvCL4FDF6qMHmVGHEZobEFtM-YAH4",
+      resStr: "",
     };
   },
 
@@ -19,8 +23,8 @@ export default {
       "https://wetabchat.haohuola.com/api/chat/conversation-v2",
       50,
       {
-        conversationId: "64a146bbc6f3578c5609b211",
-        prompt: "看看世界伟大发明"
+        conversationId: "64a18a73992792432ef85a9c",
+        prompt: "看看世界伟大发明",
       },
       {
         Authorization: this.token,
@@ -28,7 +32,7 @@ export default {
         "I-Branch": "zh",
         "I-Lang": "zh-CN",
         "I-Platform": "edge",
-        "I-Version": "1.0.53"
+        "I-Version": "1.0.53",
       }
     );
   },
@@ -63,24 +67,27 @@ export default {
         method: "POST",
         data: data,
         headers: header,
-        responseType: "blob",
-        onDownloadProgress: progressEvent => {
-          console.log(progressEvent);
-         
-        }
+        responseType: "arrayBuffer",
+        onDownloadProgress: (res) => {
+          let msgobj = res.event.target.response
+            .split("_e79218965e_")
+            .forEach((item) => {
+              console.log(item);
+            });
+          console.log(msgobj);
+
+          // if (msgobj.data && msgobj.code == 0) {
+          //   console.log(msgobj.data.content);
+          //   this.resStr += msgobj.data.content;
+          // }
+        },
       })
-        .then(res => {
-          res.on("data", () => {
-            console.log(1);
-          });
-          console.log(res);
-        })
-        .catch(err => {
+        .then((res) => {})
+        .catch((err) => {
           console.log(err);
         });
-      // this.showDataStream(response, delay);
-    }
-  }
+    },
+  },
 };
 </script>
 

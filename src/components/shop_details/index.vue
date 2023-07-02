@@ -1,22 +1,30 @@
 <template>
   <div class="shopDetails">
     <div class="top" v-if="shopDetails.image">
-      <img v-lazy="'http://tpadmin.test/static/uploads/'+shopDetails.image" />
+      <img v-lazy="'http://tpadmin.test/static/uploads/' + shopDetails.image" />
     </div>
     <div class="Minfo">
-      <h2>{{shopDetails.name}}</h2>
+      <h2>{{ shopDetails.name }}</h2>
       <div>
         <p>
           <span>市场价：</span>
-          <span>￥{{shopDetails.price}}</span>
+          <span>￥{{ shopDetails.price }}</span>
         </p>
         <p>
           <span>购买数量：</span>
           <van-stepper v-model="shopCount" />
         </p>
         <p>
-          <van-button type="info" round size="mini" @click="clickSkipPayment">立即购买</van-button>
-          <van-button type="primary" round size="mini" @click="clickPushShopCart">加入购物车</van-button>
+          <van-button type="info" round size="mini" @click="clickSkipPayment"
+            >立即购买</van-button
+          >
+          <van-button
+            type="primary"
+            round
+            size="mini"
+            @click="clickPushShopCart"
+            >加入购物车</van-button
+          >
         </p>
       </div>
     </div>
@@ -24,11 +32,11 @@
       <h2>商品参数</h2>
       <p>
         <span>商品ID号:</span>
-        {{shopDetails.id}}
+        {{ shopDetails.id }}
       </p>
       <p>
         <span>库存情况:</span>
-        {{shopDetails.num}}件
+        {{ shopDetails.num }}件
       </p>
     </div>
   </div>
@@ -43,7 +51,7 @@ export default {
   data() {
     return {
       shopDetails: {}, //商品详情
-      shopCount: 1 //购买数量
+      shopCount: 1, //购买数量
     };
   },
 
@@ -61,24 +69,25 @@ export default {
     clickPushShopCart() {
       let obj = this.shopDetails;
       obj.shopCount = this.shopCount;
-      obj.selected = false
-      this.PUSHSHOPLIST(obj)
+      obj.selected = false;
+      this.PUSHSHOPLIST(obj);
     },
-    clickSkipPayment(){
-      let obj = this.shopDetails
-      obj.shopCount = this.shopCount
-      this.PUSHPAYMENTSHOPLIST([obj])
-      this.$router.push("/layout/payment")
+    clickSkipPayment() {
+      let obj = this.shopDetails;
+      obj.shopCount = this.shopCount;
+      this.PUSHPAYMENTSHOPLIST([obj]);
+      this.$router.push("/layout/payment");
     },
     ...mapMutations("shopCart", ["PUSHSHOPLIST"]),
-    ...mapMutations("payment", ["PUSHPAYMENTSHOPLIST"])
-  }
+    ...mapMutations("payment", ["PUSHPAYMENTSHOPLIST"]),
+  },
 };
 </script>
 
 <style lang="less" scoped>
 .shopDetails {
   padding: 8px;
+  padding-bottom: 50px;
   background-color: #f1f1f1;
   height: 83vh;
   .top {

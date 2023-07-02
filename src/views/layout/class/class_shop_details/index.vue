@@ -1,15 +1,20 @@
 <template>
   <div class="classShopDetails">
-    <div class="classShopDetail" v-for="item in classShopDetailsList" :key="item.id" @click="clickSkipShopDetails(item.id)">
+    <div
+      class="classShopDetail"
+      v-for="item in classShopDetailsList"
+      :key="item.id"
+      @click="clickSkipShopDetails(item.id)"
+    >
       <div>
         <img v-lazy="item.image" />
       </div>
       <div>
-        <p>{{item.name}}</p>
-        <p>￥{{item.price}}</p>
+        <p>{{ item.name }}</p>
+        <p>￥{{ item.price }}</p>
         <p>
           <span>热卖中</span>
-          <span>剩余{{item.num}}件</span>
+          <span>剩余{{ item.num }}件</span>
         </p>
       </div>
     </div>
@@ -23,7 +28,7 @@ export default {
 
   data() {
     return {
-      classShopDetailsList: [] //商品列表
+      classShopDetailsList: [], //商品列表
     };
   },
 
@@ -38,19 +43,20 @@ export default {
         this.classShopDetailsList = res.data;
       }
     },
-    /** 
+    /**
      * 点击跳转商品详情页
      * @param {string|number} id 商品id
-    */
-   clickSkipShopDetails(id){
-     this.$router.push(`/layout/shopDetails/${id}`)
-   }
-  }
+     */
+    clickSkipShopDetails(id) {
+      this.$router.push(`/layout/shopDetails/${id}`);
+    },
+  },
 };
 </script>
 
 <style lang="less" scoped>
 .classShopDetails {
+  padding-bottom: 50px;
   display: flex;
   flex-wrap: wrap;
   background-color: #f1f1f1;

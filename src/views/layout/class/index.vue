@@ -101,6 +101,7 @@ export default {
 
 <style lang="less" scoped>
 .class {
+  padding-bottom: 50px;
   display: flex;
   .left {
     position: fixed;

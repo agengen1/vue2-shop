@@ -176,6 +176,22 @@ const routes = [
         },
         component: () => import("@/components/contact_my/index.vue"),
       },
+      {
+        path: "leaveMessage",
+        name: "leaveMessage",
+        meta: {
+          title: "留言反馈",
+        },
+        component: () => import("@/components/leave_message/index.vue"),
+      },
+      {
+        path: "videoZone",
+        name: "videoZone",
+        meta: {
+          title: "视频专区",
+        },
+        component: () => import("@/components/video_zone/index.vue"),
+      },
     ],
   },
 ];

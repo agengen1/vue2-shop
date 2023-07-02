@@ -301,7 +301,7 @@ export default {
     height: 50px;
     width: 100%;
     left: 0;
-    bottom: 50px;
+    bottom: 0;
     background-color: #ededed;
 
     display: flex;
