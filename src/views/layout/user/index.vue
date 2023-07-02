@@ -69,9 +69,11 @@ export default {
         this.$toast.success("退出成功");
         this.ClEARTOKEN();
         this.ClEARUSERINFO();
+        this.CLEARSHOPLIST();
       }
     },
     ...mapMutations("user", ["ClEARTOKEN", "ClEARUSERINFO"]),
+    ...mapMutations("shopCart", ["CLEARSHOPLIST"]),
   },
 };
 </script>

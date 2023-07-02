@@ -73,6 +73,7 @@ export default {
   created() {
     this.updateShopCount();
     this.buyUpdate();
+    this.setAllSelect()
   },
   methods: {
     updateSelected(e, id) {
@@ -130,8 +131,7 @@ export default {
       });
       if (arr.length > 0) {
         this.allSelect = arr[0].selected;
-      } else {
-      }
+      } 
     },
     clickAllSelect(e) {
       this.SETALLSELECTED(e.target.checked);

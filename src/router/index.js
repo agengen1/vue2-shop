@@ -168,6 +168,14 @@ const routes = [
         },
         component: () => import("@/components/order/order_details/index.vue"),
       },
+      {
+        path: "contactMy",
+        name: "contactMy",
+        meta: {
+          title: "chat-GPT",
+        },
+        component: () => import("@/components/contact_my/index.vue"),
+      },
     ],
   },
 ];

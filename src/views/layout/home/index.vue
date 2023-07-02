@@ -36,7 +36,7 @@
              <span>视频专区</span>
           </div>      
       </van-grid-item>
-      <van-grid-item>
+      <van-grid-item to="/layout/contactMy">
           <div>
              <img src="@/assets/menu6.png" > 
              <span>联系我们</span>

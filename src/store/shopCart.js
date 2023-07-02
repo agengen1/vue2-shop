@@ -41,6 +41,10 @@ export default {
             state.shopList = state.shopList.filter((item) => {
                 return item.id != objId
             })
+            Toast.success("删除成功！")
         },
+        CLEARSHOPLIST(state){
+            state.shopList = []
+        }
     },
 }
