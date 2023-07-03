@@ -1,5 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import userStore from "@/store/user.js";
+import { Toast } from "vant";
 
 Vue.use(VueRouter);
 
@@ -172,7 +174,7 @@ const routes = [
         path: "contactMy",
         name: "contactMy",
         meta: {
-          title: "chat-GPT",
+          title: "小思同学",
         },
         component: () => import("@/components/contact_my/index.vue"),
       },
@@ -181,6 +183,16 @@ const routes = [
         name: "leaveMessage",
         meta: {
           title: "留言反馈",
+        },
+        beforeEnter: (to, from, next) => {
+          if (userStore.state.token != "") {
+            next();
+          } else {
+            Toast.fail({
+              message: "暂未登录，请先登录！",
+            });
+            router.push("/layout/login");
+          }
         },
         component: () => import("@/components/leave_message/index.vue"),
       },
@@ -191,6 +203,15 @@ const routes = [
           title: "视频专区",
         },
         component: () => import("@/components/video_zone/index.vue"),
+      },
+      {
+        path: "videoDetails/:videoId",
+        name: "videoDetails",
+        meta: {
+          title: "视频详情",
+        },
+        component: () =>
+          import("@/components/video_zone/video_list/video_details/index"),
       },
     ],
   },

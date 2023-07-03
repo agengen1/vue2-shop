@@ -25,7 +25,7 @@
           <span class="other_title">收货地址</span>
         </template>
       </van-cell>
-      <van-cell>
+      <van-cell to="layout/contactMy">
         <!-- 使用 title 插槽来自定义标题 -->
         <template #title>
           <img src="@/assets/avatar_default.png" />

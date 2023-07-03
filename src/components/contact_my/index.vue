@@ -1,7 +1,29 @@
 <template>
   <div class="contactMy">
-    {{ resStr }}
-    http://api.qingyunke.com/api.php?key=free&appid=0&msg=百度查询 javascript
+    <div class="message">
+      <div class="main">
+        <ul id="mainss">
+          <li class="left" style="margin-top: 1vw">
+            <img src="@/assets/robot.jpeg" alt />
+            <span>你好呀(小哥哥/小姐姐)！跟我聊天吧！</span>
+          </li>
+          <li
+            v-for="(item, index) in MessageList"
+            :key="index"
+            :class="item.hosD"
+          >
+            <img src="@/assets/robot.jpeg" v-if="item.hosD == 'left'" />
+            <img src="@/assets/avatar_default.png" v-else />
+            <span>{{ item.content }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="footer">
+        <img src="@/assets/avatar_default.png" alt />
+        <input type="text" placeholder="说点什么吧…" v-model="sendmsg" />
+        <button @click="clickSendMessage">发送</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -12,80 +34,48 @@ export default {
 
   data() {
     return {
-      token:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6IjY0NjQ4MTNjMTM0ZDQ3OTJjZGJkZjVjOSIsInZlcnNpb24iOjAsInZpcFZlcnNpb24iOjAsImJyYW5jaCI6InpoIn0sImlhdCI6MTY4ODI3OTA2NSwiZXhwIjoxNjg4NDUxODY1fQ.9S0TBJtxW-WZPcwvCL4FDF6qMHmVGHEZobEFtM-YAH4",
-      resStr: "",
+      MessageList: [],
+      sendmsg: "",
+      boardfunc: null,
     };
   },
-
   mounted() {
-    this.getDataAsStream(
-      "https://wetabchat.haohuola.com/api/chat/conversation-v2",
-      50,
-      {
-        conversationId: "64a18a73992792432ef85a9c",
-        prompt: "看看世界伟大发明",
-      },
-      {
-        Authorization: this.token,
-        "I-App": "hitab",
-        "I-Branch": "zh",
-        "I-Lang": "zh-CN",
-        "I-Platform": "edge",
-        "I-Version": "1.0.53",
+    this.boardfunc = (e) => {
+      if (e.code == "Enter") {
+        this.clickSendMessage();
       }
-    );
+    };
+    window.addEventListener("keyup", this.boardfunc);
   },
-
+  beforeDestroy() {
+    window.removeEventListener("keyup", this.boardfunc);
+  },
   methods: {
-    // showDataStream(response, delay) {
-    //   let chunk = "";
-    //   response.data.on("data", data => {
-    //     chunk += data.toString(); // 将数据块转换为字符串
-    //     const endOfLineIndex = chunk.indexOf("\n"); // 寻找换行符的位置（每行逐字显示）
-    //     if (endOfLineIndex !== -1) {
-    //       process.stdout.write(chunk.slice(0, endOfLineIndex + 1)); // 逐行显示数据
-    //       chunk = chunk.slice(endOfLineIndex + 1);
-    //       setTimeout(() => {
-    //         this.showDataStream(response, delay); // 继续显示下一行数据
-    //       }, delay);
-    //     }
-    //     console.log(chunk);
-    //   });
+    async getMessage(msg) {
+      const { data: res } = await axios.get(
+        `https://api.ownthink.com/bot?spoken=${msg}`
+      );
+      if (res.message == "success") {
+        let obj = {
+          hosD: "left",
+          content: res.data.info.text,
+        };
+        this.MessageList.push(obj);
+      }
+    },
+    clickSendMessage() {
+      if (this.sendmsg != "") {
+        let obj = {
+          hosD: "right",
+          content: this.sendmsg,
+        };
 
-    //   response.data.on("end", () => {
-    //     if (chunk.length > 0) {
-    //       process.stdout.write(chunk); // 显示剩余的数据
-    //     }
-    //   });
-    // },
-
-    // 获取数据流并逐字显示
-    getDataAsStream(url, delay, data, header) {
-      const response = axios({
-        url,
-        method: "POST",
-        data: data,
-        headers: header,
-        responseType: "arrayBuffer",
-        onDownloadProgress: (res) => {
-          let msgobj = res.event.target.response
-            .split("_e79218965e_")
-            .forEach((item) => {
-              console.log(item);
-            });
-          console.log(msgobj);
-
-          // if (msgobj.data && msgobj.code == 0) {
-          //   console.log(msgobj.data.content);
-          //   this.resStr += msgobj.data.content;
-          // }
-        },
-      })
-        .then((res) => {})
-        .catch((err) => {
-          console.log(err);
-        });
+        this.MessageList.push(obj);
+        this.getMessage(this.sendmsg);
+        this.sendmsg = "";
+      } else {
+        this.$toast.fail("请输入内容！");
+      }
     },
   },
 };
@@ -93,5 +83,92 @@ export default {
 
 <style lang="less" scoped>
 .contactMy {
+  img {
+    width: 12vw;
+    border-radius: 50%;
+    height: 12vw;
+  }
+
+  .message {
+    padding: 0 0 56px;
+    width: 100%;
+    .main {
+      ul {
+        width: 100%;
+        height: 100%;
+        list-style: none;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        li {
+          padding: 2vw 1.5vw;
+          display: flex;
+          span {
+            padding: 0 2vw;
+            max-width: 68.5vw;
+            font-size: 4vw;
+            color: #fff;
+            display: flex;
+            align-items: center;
+          }
+        }
+        .left {
+          span {
+            margin-left: 2vw;
+            background-color: rgba(233, 19, 101, 0.888);
+            border-bottom-left-radius: 1vw;
+            border-bottom-right-radius: 1vw;
+            border-top-right-radius: 1vw;
+          }
+        }
+        .right {
+          flex-direction: row-reverse;
+          span {
+            margin-right: 2vw;
+            background-color: rgba(57, 122, 251, 0.879);
+            border-bottom-left-radius: 1vw;
+            border-bottom-right-radius: 1vw;
+            border-top-left-radius: 1vw;
+          }
+        }
+      }
+    }
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 15vw;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      input {
+        padding-left: 2vw;
+        width: 60vw;
+        height: 10vw;
+        border: 0;
+        font-size: 5vw;
+        border-radius: 1vw;
+        background-color: rgba(236, 236, 236, 0.826);
+        outline: none;
+        &::placeholder {
+          color: rgb(141, 141, 141);
+          font-size: 5vw;
+        }
+      }
+      button {
+        width: 12vw;
+        border-radius: 0.5vw;
+        height: 10vw;
+        border: 0;
+        background-color: rgba(230, 78, 103, 0.826);
+        font-size: 4vw;
+        font-weight: 700;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 1.5vw;
+      }
+    }
+  }
 }
 </style>
